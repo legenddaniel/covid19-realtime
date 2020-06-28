@@ -1,0 +1,52 @@
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  @include flex(null, center, null);
+}
+.justify-around {
+  @include flex(null, space-around, null);
+}
+
+.align-center {
+  @include flex(null, null, center);
+}
+
+.flex-center {
+  @include flex(null, center, center);
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  @include flex(column, center, center);
+}
+
+.dashboard-area {
+  @include flex(column, center, center);
+}
+.dashboards {
+  @include flex(null, space-around, center);
+}
+.dashboard {
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid red;
+  border-radius: 25%;
+// line-height: calc(5rem - 50%);
+text-align: center;
+}
