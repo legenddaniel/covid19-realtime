@@ -1,26 +1,7 @@
-import { apiInfo } from './config';
+// import { fetchWorld, fetchCountryList } from './config';
 
-// class Fetch {
-//     constructor(api) {
-//         this.url = api.url;
-//         this.opt = api.option;
-//     }
-
-//     static async ajax() {
-//         const res = await fetch(this.url, this.opt);
-//         const data = await res.text();
-//         // console.log(res.json());
-//         return data;
-//     }
-
-//     async showJSONData(type) {
-//         console.log(this);
-//         const data = await Fetch.ajax.call(this);
-//         return data[0][type];
-//     };
-// }
-
-function Fetch(api) {
+// Since the API I use is the free version and request restricted (1 request per second) so I may use setTimeout in some cases
+export default function Fetch(api) {
     const url = api.url;
     const opt = api.option;
     const ajax = async () => {
@@ -31,9 +12,10 @@ function Fetch(api) {
     return {
         async showJSONData() {
             const data = await ajax();
-            return data[0];
+            return data;
         }
     }
 }
 
-export const showWorldData = Fetch(apiInfo).showJSONData;
+// export const showWorldData = Fetch(fetchWorld).showJSONData;
+// export const showCountryList = Fetch(fetchCountryList).showJSONData;
