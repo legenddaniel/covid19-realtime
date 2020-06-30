@@ -1,10 +1,11 @@
 // Remove it from .gitignore before final push
 
-const urlWorld = process.env.REACT_APP_WORLD_URL;
-const urlList = process.env.REACT_APP_LIST_URL;
-const urlCountry = process.env.REACT_APP_COUNTRY_URL;
-const host = process.env.REACT_APP_HOST;
+const host = "covid-19-data.p.rapidapi.com";
 const key = process.env.REACT_APP_KEY;
+
+const urlWorld = `https://${host}/totals?format=json`;
+const urlList = `https://${host}/help/countries?format=json`;
+const urlCountry = `https://${host}/country?format=json&name=`;
 
 export const fetchWorld = {
     url: urlWorld,

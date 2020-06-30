@@ -35,7 +35,7 @@ class Dropdown extends React.Component {
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
-                            <option>Loading</option>}
+                            <option disabled>Loading</option>}
                     </datalist>
                 </div>
                 <BtnSearch country={this.state.currentCountry}/>
@@ -46,15 +46,20 @@ class Dropdown extends React.Component {
 
 class BtnSearch extends React.Component {
     getCountryData() {
-        /* 
-        %20 === ' '
-        %252C === ',' 
-        %25C3%2585 === 'Å'
-        %25C3%25A7 === 'ç'
-        %25C3%25A9 === 'é'
-        */
         const newFetchCountry = { ...fetchCountry };
-        newFetchCountry.url = fetchCountry.url + this.props.country;
+        const replacer = (match, p1, p2, p3, p4, p5) => {
+            if (p1) return '%20';
+            if (p2) return '%252C';
+            if (p3) return '%25C3%2585';
+            if (p4) return '%25C3%25A7';
+            if (p5) return '%25C3%25A9';
+        };
+        const encodedCountry = this.props.country.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
+        newFetchCountry.url = fetchCountry.url + encodedCountry;
+        const showCountryData = Fetch(newFetchCountry).showJSONData;
+        showCountryData.then(res => {
+            
+        })
     }
 
     render() {

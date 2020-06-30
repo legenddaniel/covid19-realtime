@@ -33,16 +33,16 @@ class Dashboard extends React.Component {
             <section className="dashboard-area">
                 <span>Last Update: {this.state.update || 'Loading...'}</span>
                 <div className="dashboards">
-                    <Item type={this.state.confirmed} name="Confirmed" />
-                    <Item type={this.state.recovered} name="Recovered" />
-                    <Item type={this.state.deaths} name="Deaths" />
+                    <DashboardItem type={this.state.confirmed} name="Confirmed" />
+                    <DashboardItem type={this.state.recovered} name="Recovered" />
+                    <DashboardItem type={this.state.deaths} name="Deaths" />
                 </div>
             </section>
         )
     }
 }
 
-class Item extends React.Component {
+class DashboardItem extends React.Component {
     render() {
         return (
             <div className="dashboard">{this.props.name}: <br /><span>{this.props.type || 'Loading...'}</span></div>
