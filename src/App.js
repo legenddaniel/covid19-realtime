@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Dashboard from './dashboard';
-import Dropdown from './dropdown';
+import { SearchArea, Dropdown } from './dropdown';
 
 function App() {
   return (
@@ -13,10 +13,7 @@ function App() {
       </article>
       <article className="country">
         <h2>Or by country:</h2>
-        <div>
-          <Dropdown />
-          {/* <Dashboard/> */}
-        </div>
+        <SearchArea />
       </article>
     </main>
 

@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Fetch from './fetch';
 import { fetchCountryList, fetchCountry } from './config';
+import Dashboard from './dashboard';
 
-class Dropdown extends React.Component {
+export class SearchArea extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            country: ''
+        }
+        this.setCountry = this.setCountry.bind(this);
+    }
+
+    setCountry(country) {
+        this.setState({ country });
+    }
+
+    render() {
+        return (
+            <div>
+                <Dropdown onSetCountry={this.setCountry} />
+                {/* <Dashboard /> */}
+            </div>
+        )
+    }
+}
+
+// props for data
+export class Dropdown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,10 +35,34 @@ class Dropdown extends React.Component {
             currentCountry: ''
         };
         this.setCountry = this.setCountry.bind(this);
+        this.getCountryData = this.getCountryData.bind(this);
     }
 
     setCountry(e) {
         this.setState({ currentCountry: e.target.value });
+    }
+
+    getCountryData() {
+        const newFetchCountry = { ...fetchCountry };
+        const replacer = (match, p1, p2, p3, p4, p5) => {
+            if (p1) return '%20';
+            if (p2) return '%252C';
+            if (p3) return '%25C3%2585';
+            if (p4) return '%25C3%25A7';
+            if (p5) return '%25C3%25A9';
+        };
+        const encodedCountry = this.state.currentCountry.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
+        newFetchCountry.url = fetchCountry.url + encodedCountry;
+        const showCountryData = Fetch(newFetchCountry).showJSONData;
+        showCountryData.then(res => {
+            const data = res[0];
+            // Dropdown.setState({
+            //     update: data.lastUpdate,
+            //     confirmed: data.confirmed,
+            //     recovered: data.recovered,
+            //     deaths: data.deaths
+            // })
+        })
     }
 
     componentDidMount() {
@@ -39,44 +88,46 @@ class Dropdown extends React.Component {
                             <option disabled>Loading</option>}
                     </datalist>
                 </div>
-                <BtnSearch country={this.state.currentCountry} />
+                <button className="comp" onClick={this.getCountryData}>Search</button>
+                {/* <BtnSearch country={this.state.currentCountry} /> */}
+
             </section>
         )
     }
 }
 
-class BtnSearch extends React.Component {
-    getCountryData() {
-        const newFetchCountry = { ...fetchCountry };
-        const replacer = (match, p1, p2, p3, p4, p5) => {
-            if (p1) return '%20';
-            if (p2) return '%252C';
-            if (p3) return '%25C3%2585';
-            if (p4) return '%25C3%25A7';
-            if (p5) return '%25C3%25A9';
-        };
-        const encodedCountry = this.props.country.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
-        newFetchCountry.url = fetchCountry.url + encodedCountry;
-        const showCountryData = Fetch(newFetchCountry).showJSONData;
-        showCountryData.then(res => {
-            const data = res[0];
-            // Dropdown.setState({
-            //     update: data.lastUpdate,
-            //     confirmed: data.confirmed,
-            //     recovered: data.recovered,
-            //     deaths: data.deaths
-            // })
-        })
-    }
+// class BtnSearch extends React.Component {
+//     getCountryData() {
+//         const newFetchCountry = { ...fetchCountry };
+//         const replacer = (match, p1, p2, p3, p4, p5) => {
+//             if (p1) return '%20';
+//             if (p2) return '%252C';
+//             if (p3) return '%25C3%2585';
+//             if (p4) return '%25C3%25A7';
+//             if (p5) return '%25C3%25A9';
+//         };
+//         const encodedCountry = this.props.country.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
+//         newFetchCountry.url = fetchCountry.url + encodedCountry;
+//         const showCountryData = Fetch(newFetchCountry).showJSONData;
+//         showCountryData.then(res => {
+//             const data = res[0];
+//             // Dropdown.setState({
+//             //     update: data.lastUpdate,
+//             //     confirmed: data.confirmed,
+//             //     recovered: data.recovered,
+//             //     deaths: data.deaths
+//             // })
+//         })
+//     }
 
-    render() {
-        return (
-            <button className="comp" onClick={this.getCountryData.bind(this)}>Search</button>
-        )
-    }
-}
+//     render() {
+//         return (
+//             <button className="comp" onClick={this.getCountryData.bind(this)}>Search</button>
+//         )
+//     }
+// }
 
-export default Dropdown;
+// export default Dropdown;
 
 /*
 Btn fetch data according to Dropdown value

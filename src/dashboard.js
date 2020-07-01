@@ -2,7 +2,7 @@ import React from 'react';
 import Fetch from './fetch';
 import { fetchWorld } from './config';
 
-// Can use props
+// Can use props for data
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
