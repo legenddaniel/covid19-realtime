@@ -33,9 +33,9 @@ class Dashboard extends React.Component {
             <section className="dashboard-area">
                 <span>Last Update: {this.state.update || 'Loading...'}</span>
                 <div className="dashboards">
-                    <DashboardItem type={this.state.confirmed} name="Confirmed" />
-                    <DashboardItem type={this.state.recovered} name="Recovered" />
-                    <DashboardItem type={this.state.deaths} name="Deaths" />
+                    <DashboardItem num={this.state.confirmed} type="Confirmed" />
+                    <DashboardItem num={this.state.recovered} type="Recovered" />
+                    <DashboardItem num={this.state.deaths} type="Deaths" />
                 </div>
             </section>
         )
@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
 class DashboardItem extends React.Component {
     render() {
         return (
-            <div className="dashboard">{this.props.name}: <br /><span>{this.props.type || 'Loading...'}</span></div>
+            <div className="dashboard">{this.props.type}: <br /><span>{this.props.num || 'Loading...'}</span></div>
         )
     }
 }

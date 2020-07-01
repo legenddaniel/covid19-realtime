@@ -9,10 +9,11 @@ class Dropdown extends React.Component {
             countries: [],
             currentCountry: ''
         };
+        this.setCountry = this.setCountry.bind(this);
     }
 
-    setCountry() {
-        this.setState({ currentCountry: document.getElementById('country').value });
+    setCountry(e) {
+        this.setState({ currentCountry: e.target.value });
     }
 
     componentDidMount() {
@@ -31,14 +32,14 @@ class Dropdown extends React.Component {
             <section className="dropdown-area">
                 <div className="dropdown">
                     <label htmlFor="country">Select country:</label>
-                    <input list="countries" name="country" id="country" onChange={this.setCountry.bind(this)} />
+                    <input list="countries" name="country" id="country" onChange={this.setCountry} />
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
                             <option disabled>Loading</option>}
                     </datalist>
                 </div>
-                <BtnSearch country={this.state.currentCountry}/>
+                <BtnSearch country={this.state.currentCountry} />
             </section>
         )
     }
@@ -58,7 +59,13 @@ class BtnSearch extends React.Component {
         newFetchCountry.url = fetchCountry.url + encodedCountry;
         const showCountryData = Fetch(newFetchCountry).showJSONData;
         showCountryData.then(res => {
-            
+            const data = res[0];
+            // Dropdown.setState({
+            //     update: data.lastUpdate,
+            //     confirmed: data.confirmed,
+            //     recovered: data.recovered,
+            //     deaths: data.deaths
+            // })
         })
     }
 
@@ -70,3 +77,13 @@ class BtnSearch extends React.Component {
 }
 
 export default Dropdown;
+
+/*
+Btn fetch data according to Dropdown value
+Once receive, in the await function, use callback to set state (update, confirmed, recovered, deaths) to the parent
+Parent pass the state as props to sibling dashboard
+Sibling dashboard set state to the data
+
+Will it affect another component?
+
+*/
