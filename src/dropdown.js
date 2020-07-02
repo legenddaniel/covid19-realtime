@@ -3,46 +3,63 @@ import Fetch from './fetch';
 import { fetchCountryList, fetchCountry } from './config';
 import Dashboard from './dashboard';
 
-export class SearchArea extends React.Component {
+export default class SearchArea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            country: ''
+            data: {
+                update: '',
+                confirmed: '',
+                recovered: '',
+                deaths: ''
+            },
+            showDashboard: false
         }
-        this.setCountry = this.setCountry.bind(this);
+        this.setCountryData = this.setCountryData.bind(this);
+        this.showDashboard = this.showDashboard.bind(this);
     }
 
-    setCountry(country) {
-        this.setState({ country });
+    setCountryData(data) {
+        console.log(data);
+        this.setState({
+            data: {
+                update: data.lastUpdate,
+                confirmed: data.confirmed,
+                recovered: data.recovered,
+                deaths: data.deaths
+            }
+        });
+    }
+
+    showDashboard(toggle) {
+        this.setState({ showDashboard: toggle })
     }
 
     render() {
         return (
             <div>
-                <Dropdown onSetCountry={this.setCountry} />
-                {/* <Dashboard /> */}
+                <Dropdown onSetCountryData={this.setCountryData} onShowDashboard={this.showDashboard} />
+                <Dashboard data={this.state.data} visible={this.state.showDashboard} />
             </div>
         )
     }
 }
 
 // props for data
-export class Dropdown extends React.Component {
+class Dropdown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             countries: [],
             currentCountry: ''
         };
-        this.setCountry = this.setCountry.bind(this);
-        this.getCountryData = this.getCountryData.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        // this.passCountryData = this.passCountryData.bind(this);
+        // this.passToggleDashboard = this.passToggleDashboard.bind(this);
     }
 
-    setCountry(e) {
-        this.setState({ currentCountry: e.target.value });
-    }
-
-    getCountryData() {
+    handleClick() {
         const newFetchCountry = { ...fetchCountry };
         const replacer = (match, p1, p2, p3, p4, p5) => {
             if (p1) return '%20';
@@ -53,16 +70,28 @@ export class Dropdown extends React.Component {
         };
         const encodedCountry = this.state.currentCountry.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
         newFetchCountry.url = fetchCountry.url + encodedCountry;
+        // console.log(newFetchCountry);
         const showCountryData = Fetch(newFetchCountry).showJSONData;
-        showCountryData.then(res => {
+        showCountryData().then(res => {
             const data = res[0];
-            // Dropdown.setState({
-            //     update: data.lastUpdate,
-            //     confirmed: data.confirmed,
-            //     recovered: data.recovered,
-            //     deaths: data.deaths
-            // })
+            this.passCountryData(data);
+            // console.log(this);
         })
+
+        this.passToggleDashboard(true);
+    }
+
+    handleChange(e) {
+        this.setState({ currentCountry: e.target.value, });
+        this.passToggleDashboard(false);
+    }
+
+    passCountryData(data) {
+        this.props.onSetCountryData(data);
+    }
+
+    passToggleDashboard(toggle) {
+        this.props.onShowDashboard(toggle);
     }
 
     componentDidMount() {
@@ -81,60 +110,27 @@ export class Dropdown extends React.Component {
             <section className="dropdown-area">
                 <div className="dropdown">
                     <label htmlFor="country">Select country:</label>
-                    <input list="countries" name="country" id="country" onChange={this.setCountry} />
+                    <input list="countries" name="country" id="country" onChange={this.handleChange} />
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
                             <option disabled>Loading</option>}
                     </datalist>
                 </div>
-                <button className="comp" onClick={this.getCountryData}>Search</button>
-                {/* <BtnSearch country={this.state.currentCountry} /> */}
+                <button className="comp" onClick={this.handleClick}>Search</button>
 
             </section>
         )
     }
 }
 
-// class BtnSearch extends React.Component {
-//     getCountryData() {
-//         const newFetchCountry = { ...fetchCountry };
-//         const replacer = (match, p1, p2, p3, p4, p5) => {
-//             if (p1) return '%20';
-//             if (p2) return '%252C';
-//             if (p3) return '%25C3%2585';
-//             if (p4) return '%25C3%25A7';
-//             if (p5) return '%25C3%25A9';
-//         };
-//         const encodedCountry = this.props.country.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
-//         newFetchCountry.url = fetchCountry.url + encodedCountry;
-//         const showCountryData = Fetch(newFetchCountry).showJSONData;
-//         showCountryData.then(res => {
-//             const data = res[0];
-//             // Dropdown.setState({
-//             //     update: data.lastUpdate,
-//             //     confirmed: data.confirmed,
-//             //     recovered: data.recovered,
-//             //     deaths: data.deaths
-//             // })
-//         })
-//     }
-
-//     render() {
-//         return (
-//             <button className="comp" onClick={this.getCountryData.bind(this)}>Search</button>
-//         )
-//     }
-// }
-
-// export default Dropdown;
-
 /*
-Btn fetch data according to Dropdown value
-Once receive, in the await function, use callback to set state (update, confirmed, recovered, deaths) to the parent
-Parent pass the state as props to sibling dashboard
-Sibling dashboard set state to the data
-
-Will it affect another component?
+1. When mounted, get data from xhr and set state of country list
+2. When selected a country, set state of current country
+3. When clicking button, get data from xhr and fire passCountryData within the promise
+4. Now the parent holds data in state
+5. Assign the prop value of Dashboard as the data in parent state
+6. Change the Dashboard componentDidMount() to get different data
+7. Set Dashboard state equal to props (for this Dashboard only)
 
 */

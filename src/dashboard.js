@@ -7,35 +7,67 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            update: '',
-            confirmed: '',
-            recovered: '',
-            deaths: ''
+            data: {
+                update: '',
+                confirmed: '',
+                recovered: '',
+                deaths: ''
+            }
         };
     }
 
     componentDidMount() {
-        const showWorldData = Fetch(fetchWorld).showJSONData;
-        showWorldData().then(res => {
-            const data = res[0];
-            this.setState({
-                update: data.lastUpdate,
-                confirmed: data.confirmed,
-                recovered: data.recovered,
-                deaths: data.deaths
+        if (!('data' in this.props)) {
+            const showWorldData = Fetch(fetchWorld).showJSONData;
+            showWorldData().then(res => {
+                const data = res[0];
+                this.setState({
+                    data: {
+                        update: data.lastUpdate,
+                        confirmed: data.confirmed,
+                        recovered: data.recovered,
+                        deaths: data.deaths
+                    }
+                });
             });
-        });
-
+         } // else {
+        //     const data = this.props.data;
+        //     this.setState({
+        //         data: {
+        //             update: data.lastUpdate,
+        //             confirmed: data.confirmed,
+        //             recovered: data.recovered,
+        //             deaths: data.deaths
+        //         }
+        //     });
+        // }
     }
 
+    // componentDidUpdate() {
+    //     if ('data' in this.props) {
+    //         const data = this.props.data;
+    //         this.setState({
+    //             data: {
+    //                 update: data.lastUpdate,
+    //                 confirmed: data.confirmed,
+    //                 recovered: data.recovered,
+    //                 deaths: data.deaths
+    //             }
+    //         });
+    //     }
+    // }
+
     render() {
+        const visibility = {
+            visibility: 'visible' in this.props && !this.props.visible ? 'hidden' : 'visible'
+        };
         return (
-            <section className="dashboard-area">
-                <span>Last Update: {this.state.update || 'Loading...'}</span>
+            <section className="dashboard-area" style={visibility}>
+                <span>Last Update: {this.state.data.update || 'Loading...'}</span>
                 <div className="dashboards">
-                    <DashboardItem num={this.state.confirmed} type="Confirmed" />
-                    <DashboardItem num={this.state.recovered} type="Recovered" />
-                    <DashboardItem num={this.state.deaths} type="Deaths" />
+                    <DashboardItem num={this.state.data.confirmed} type="Confirmed" />
+                    <DashboardItem num={this.state.data.recovered} type="Recovered" />
+                    <DashboardItem num={this.state.data.deaths} type="Deaths" />
                 </div>
             </section>
         )

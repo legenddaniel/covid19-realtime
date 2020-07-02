@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Dashboard from './dashboard';
-import { SearchArea, Dropdown } from './dropdown';
+import SearchArea from './dropdown';
 
 function App() {
   return (
