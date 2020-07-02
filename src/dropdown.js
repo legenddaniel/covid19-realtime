@@ -20,7 +20,7 @@ export default class SearchArea extends React.Component {
     }
 
     setCountryData(data) {
-        console.log(data);
+        console.log(data + 'bbb');
         this.setState({
             data: {
                 lastUpdate: data.lastUpdate,
@@ -61,21 +61,13 @@ class Dropdown extends React.Component {
 
     handleClick() {
         const newFetchCountry = { ...fetchCountry };
-        const replacer = (match, p1, p2, p3, p4, p5) => {
-            if (p1) return '%20';
-            if (p2) return '%252C';
-            if (p3) return '%25C3%2585';
-            if (p4) return '%25C3%25A7';
-            if (p5) return '%25C3%25A9';
-        };
-        const encodedCountry = this.state.currentCountry.replace(/(\s)|(,)|(Å)|(ç)|(é)/g, replacer); // encodeURI() not working well
+        const encodedCountry = encodeURI(this.state.currentCountry);
         newFetchCountry.url = fetchCountry.url + encodedCountry;
-        // console.log(newFetchCountry);
         const showCountryData = Fetch(newFetchCountry).showJSONData;
         showCountryData().then(res => {
             const data = res[0];
+            console.log(data);
             this.passCountryData(data);
-            // console.log(this);
         })
 
         this.passToggleDashboard(true);
