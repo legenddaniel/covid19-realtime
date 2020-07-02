@@ -8,7 +8,7 @@ export default class SearchArea extends React.Component {
         super(props);
         this.state = {
             data: {
-                update: '',
+                lastUpdate: '',
                 confirmed: '',
                 recovered: '',
                 deaths: ''
@@ -23,7 +23,7 @@ export default class SearchArea extends React.Component {
         console.log(data);
         this.setState({
             data: {
-                update: data.lastUpdate,
+                lastUpdate: data.lastUpdate,
                 confirmed: data.confirmed,
                 recovered: data.recovered,
                 deaths: data.deaths

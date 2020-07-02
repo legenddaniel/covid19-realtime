@@ -8,7 +8,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             data: {
-                update: '',
+                lastUpdate: '',
                 confirmed: '',
                 recovered: '',
                 deaths: ''
@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
                 const data = res[0];
                 this.setState({
                     data: {
-                        update: data.lastUpdate,
+                        lastUpdate: data.lastUpdate,
                         confirmed: data.confirmed,
                         recovered: data.recovered,
                         deaths: data.deaths
@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
         //     const data = this.props.data;
         //     this.setState({
         //         data: {
-        //             update: data.lastUpdate,
+        //             lastUpdate: data.lastUpdate,
         //             confirmed: data.confirmed,
         //             recovered: data.recovered,
         //             deaths: data.deaths
@@ -43,19 +43,19 @@ class Dashboard extends React.Component {
         // }
     }
 
-    // componentDidUpdate() {
-    //     if ('data' in this.props) {
-    //         const data = this.props.data;
-    //         this.setState({
-    //             data: {
-    //                 update: data.lastUpdate,
-    //                 confirmed: data.confirmed,
-    //                 recovered: data.recovered,
-    //                 deaths: data.deaths
-    //             }
-    //         });
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if ('data' in this.props && this.props.data !== prevProps.data) {
+            const data = this.props.data;
+            this.setState({
+                data: {
+                    lastUpdate: data.lastUpdate,
+                    confirmed: data.confirmed,
+                    recovered: data.recovered,
+                    deaths: data.deaths
+                }
+            });
+        }
+    }
 
     render() {
         const visibility = {
@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
         };
         return (
             <section className="dashboard-area" style={visibility}>
-                <span>Last Update: {this.state.data.update || 'Loading...'}</span>
+                <span>Last Update: {this.state.data.lastUpdate || 'Loading...'}</span>
                 <div className="dashboards">
                     <DashboardItem num={this.state.data.confirmed} type="Confirmed" />
                     <DashboardItem num={this.state.data.recovered} type="Recovered" />
