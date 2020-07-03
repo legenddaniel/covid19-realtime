@@ -30,10 +30,25 @@
   @include flex(null, center, center);
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
+  text-align: center;
   @include flex(column, center, center);
+}
+
+.header {
+  margin: auto 2rem;
+}
+.txt-jumbo {
+  font-size: 6rem;
+}
+.txt-subjumbo {
+  font-size: 3rem;
 }
 
 .dashboard-area {
@@ -43,10 +58,21 @@
   @include flex(null, space-around, center);
 }
 .dashboard {
-  width: 5rem;
-  height: 5rem;
-  border: 2px solid red;
-  border-radius: 25%;
-// line-height: calc(5rem - 50%);
-text-align: center;
+  // line-height: calc(5rem - 50%);
+  width: 15rem;
+  height: 6rem;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.dashboard-confirmed {
+  background-color: rgb(255, 193, 78);
+}
+.dashboard-recovered {
+  background-color: rgb(132, 216, 115);
+}
+.dashboard-deaths {
+  background-color: rgb(255, 91, 91);
 }

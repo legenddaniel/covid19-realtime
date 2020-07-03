@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Fetch from './fetch';
 import { fetchCountryList, fetchCountry } from './config';
 import Dashboard from './dashboard';
@@ -20,7 +20,6 @@ export default class SearchArea extends React.Component {
     }
 
     setCountryData(data) {
-        console.log(data + 'bbb');
         this.setState({
             data: {
                 lastUpdate: data.lastUpdate,
@@ -55,8 +54,6 @@ class Dropdown extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.passCountryData = this.passCountryData.bind(this);
-        // this.passToggleDashboard = this.passToggleDashboard.bind(this);
     }
 
     handleClick() {
@@ -66,7 +63,6 @@ class Dropdown extends React.Component {
         const showCountryData = Fetch(newFetchCountry).showJSONData;
         showCountryData().then(res => {
             const data = res[0];
-            console.log(data);
             this.passCountryData(data);
         })
 
@@ -110,19 +106,7 @@ class Dropdown extends React.Component {
                     </datalist>
                 </div>
                 <button className="comp" onClick={this.handleClick}>Search</button>
-
             </section>
         )
     }
 }
-
-/*
-1. When mounted, get data from xhr and set state of country list
-2. When selected a country, set state of current country
-3. When clicking button, get data from xhr and fire passCountryData within the promise
-4. Now the parent holds data in state
-5. Assign the prop value of Dashboard as the data in parent state
-6. Change the Dashboard componentDidMount() to get different data
-7. Set Dashboard state equal to props (for this Dashboard only)
-
-*/
