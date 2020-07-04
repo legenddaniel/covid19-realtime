@@ -9,6 +9,9 @@ function App() {
       <header className="header">
         <h1 className="txt-jumbo">Covid-19 Statistics</h1>
         <h2 className="txt-subjumbo">Wash Hands, Wear Mask, Stay Home</h2>
+        <div className="bg-video">
+          <iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/3tBk7ONm95Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         {/* Replacekeywords by iconfont */}
       </header>
       <article className="data-area world">
