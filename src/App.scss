@@ -1,9 +1,13 @@
+@use "sass:math";
+
 @mixin flex($direction, $justify, $align) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justify;
   align-items: $align;
 }
+
+$btn-search-side: 36px;
 
 * {
   box-sizing: border-box;
@@ -46,6 +50,7 @@
 .container {
   // width: 100vw;
   // height: 100vh;
+  opacity: 0.9;
   color: #fff;
   text-align: center;
   @include flex(column, center, center);
@@ -88,6 +93,7 @@
   height: 6rem;
   margin: 1rem;
   border-radius: 15px;
+  // opacity: .9;
   color: #fff;
   font-size: 2rem;
   text-align: center;
@@ -104,14 +110,42 @@
 }
 
 .dropdown-area {
+  position: relative;
   margin: 1rem;
-  @include flex(null, center, center);
+  // @include flex(null, center, center);
 }
 .dropdown {
-  margin-right: 2rem;
+  display: inline-block;
+  // margin: auto;
 }
-.dropdown::after {
-  content: attr(data-alert);
+
+.btn-search {
+  position: absolute;
+  padding-left: .7 * $btn-search-side;
+  margin-left: 3rem;
+  width: 10rem;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  opacity: 0.9;
+  font-size: 1.2rem;
+}
+.btn-search::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $btn-search-side;
+  height: $btn-search-side;
+  transform: translateX(-50%) rotate(45deg);
+}
+.btn-search-green::before {
+  background-color: green;
+}
+.btn-search-red::before {
+  background-color: red;
 }
 
 .country-list,

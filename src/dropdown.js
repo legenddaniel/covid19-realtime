@@ -51,11 +51,16 @@ class Dropdown extends React.Component {
         this.state = {
             countries: [],
             currentCountry: '',
-            alert: '',
-            inputClass: 'country-list'
+            inputClass: 'country-list',
+            btnTxt: 'Search',
+            btnColor: 'green',
+            btnDisabled: false
         };
+        this.ref = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.focusInput = this.focusInput.bind(this);
+        this.switchBtnColor = this.switchBtnColor.bind(this);
     }
 
     handleClick() {
@@ -70,21 +75,33 @@ class Dropdown extends React.Component {
             });
             this.passToggleDashboard(true);
         } else {
-            this.setState({ alert: 'Invalid Value', inputClass: 'country-list-a' });
+            this.setState({
+                inputClass: 'country-list-a',
+                btnTxt: 'Invalid Value',
+                btnColor: 'red',
+                btnDisabled: true
+            });
+            this.focusInput();
         }
     }
 
     handleChange(e) {
-        if (this.state.alert) {
-            this.setState({
-                currentCountry: '',
-                alert: '',
-                inputClass: 'country-list'
-            });
-        } else {
-            this.setState({ currentCountry: e.target.value, });
-            this.passToggleDashboard(false);
-        }
+        this.setState({
+            currentCountry: e.target.value,
+            inputClass: 'country-list',
+            btnTxt: 'Search',
+            btnColor: 'green',
+            btnDisabled: false
+        });
+        this.passToggleDashboard(false);
+    }
+
+    focusInput() {
+        this.ref.current.focus();
+    }
+
+    switchBtnColor(btnColor) {
+        this.setState({ btnColor });
     }
 
     passCountryData(data) {
@@ -109,16 +126,16 @@ class Dropdown extends React.Component {
     render() {
         return (
             <section className="dropdown-area">
-                <div className="dropdown" data-alert={this.state.alert}>
-                    <label htmlFor="country">Select country: </label>
-                    <input type="search" list="countries" name="country" id="country" className={this.state.inputClass} onChange={this.handleChange} />
+                <div className="dropdown">
+                    {/* <label htmlFor="country">Select country: </label> */}
+                    <input type="search" placeholder="Select Country" list="countries" name="country" id="country" className={this.state.inputClass} onChange={this.handleChange} ref={this.ref} />
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
                             <option disabled>Loading</option>}
                     </datalist>
                 </div>
-                <button className="comp" onClick={this.handleClick}>Search</button>
+                <button className={`btn-search btn-search-${this.state.btnColor}`} onClick={this.handleClick} disabled={this.state.btnDisabled} >{this.state.btnTxt}</button>
             </section>
         )
     }
