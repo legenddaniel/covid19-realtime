@@ -11,12 +11,12 @@ function App() {
         <h2 className="txt-subjumbo">Wash Hands, Wear Mask, Stay Home</h2>
         {/* Replacekeywords by iconfont */}
       </header>
-      <article className="world">
-        <h2>Worldwide:</h2>
+      <article className="data-area world">
+        <h2 className="txt-topic-local">Worldwide:</h2>
         <Dashboard />
       </article>
-      <article className="country">
-        <h2>Or by country:</h2>
+      <article className="data-area country">
+        <h2 className="txt-topic-local">Or by country:</h2>
         <SearchArea />
       </article>
     </main>

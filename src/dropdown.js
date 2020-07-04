@@ -50,28 +50,41 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
             countries: [],
-            currentCountry: ''
+            currentCountry: '',
+            alert: '',
+            inputClass: 'country-list'
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleClick() {
-        const newFetchCountry = { ...fetchCountry };
-        const encodedCountry = encodeURI(this.state.currentCountry);
-        newFetchCountry.url = fetchCountry.url + encodedCountry;
-        const showCountryData = Fetch(newFetchCountry).showJSONData;
-        showCountryData().then(res => {
-            const data = res[0];
-            this.passCountryData(data);
-        })
-
-        this.passToggleDashboard(true);
+        if (this.state.countries.some(country => country.name === this.state.currentCountry)) {
+            const newFetchCountry = { ...fetchCountry };
+            const encodedCountry = encodeURI(this.state.currentCountry);
+            newFetchCountry.url = fetchCountry.url + encodedCountry;
+            const showCountryData = Fetch(newFetchCountry).showJSONData;
+            showCountryData().then(res => {
+                const data = res[0];
+                this.passCountryData(data);
+            });
+            this.passToggleDashboard(true);
+        } else {
+            this.setState({ alert: 'Invalid Value', inputClass: 'country-list-a' });
+        }
     }
 
     handleChange(e) {
-        this.setState({ currentCountry: e.target.value, });
-        this.passToggleDashboard(false);
+        if (this.state.alert) {
+            this.setState({
+                currentCountry: '',
+                alert: '',
+                inputClass: 'country-list'
+            });
+        } else {
+            this.setState({ currentCountry: e.target.value, });
+            this.passToggleDashboard(false);
+        }
     }
 
     passCountryData(data) {
@@ -96,9 +109,9 @@ class Dropdown extends React.Component {
     render() {
         return (
             <section className="dropdown-area">
-                <div className="dropdown">
-                    <label htmlFor="country">Select country:</label>
-                    <input list="countries" name="country" id="country" onChange={this.handleChange} />
+                <div className="dropdown" data-alert={this.state.alert}>
+                    <label htmlFor="country">Select country: </label>
+                    <input type="search" list="countries" name="country" id="country" className={this.state.inputClass} onChange={this.handleChange} />
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :

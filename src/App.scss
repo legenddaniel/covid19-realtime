@@ -34,6 +34,15 @@
   visibility: hidden;
 }
 
+.txt-jumbo {
+  font-size: 6rem;
+}
+.txt-subjumbo {
+  font-size: 3rem;
+}
+.txt-topic-local {
+  font-size: 2rem;
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -44,11 +53,10 @@
 .header {
   margin: auto 2rem;
 }
-.txt-jumbo {
-  font-size: 6rem;
-}
-.txt-subjumbo {
-  font-size: 3rem;
+
+.data-area {
+  // width: 100%;
+  margin: 3rem;
 }
 
 .dashboard-area {
@@ -61,6 +69,7 @@
   // line-height: calc(5rem - 50%);
   width: 15rem;
   height: 6rem;
+  margin: 1rem;
   border-radius: 15px;
   color: #fff;
   font-size: 2rem;
@@ -75,4 +84,31 @@
 }
 .dashboard-deaths {
   background-color: rgb(255, 91, 91);
+}
+
+.dropdown-area {
+  margin: 1rem;
+  @include flex(null, center, center);
+}
+.dropdown {
+  margin-right: 2rem;
+}
+.dropdown::after {
+  content: attr(data-alert);
+}
+
+.country-list,
+.country-list-a {
+  width: 15rem;
+  padding: 0.5rem;
+  outline: none;
+}
+.country-list:focus {
+  border-color: green;
+}
+.country-list-a:focus {
+  border-color: red;
+}
+.country-list::-webkit-calendar-picker-indicator {
+  display: none;
 }

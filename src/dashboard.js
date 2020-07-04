@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
     }
 
     getLastUpdate(time) {
-        const timeLocale = new Date(time).toLocaleString('en-CA', { hour12: false });
+        const timeLocale = new Date(time).toLocaleString('en-CA');
         return time === null ? 'N/A' : `${timeLocale} (EST)`;
     }
 
