@@ -51,16 +51,15 @@ class Dropdown extends React.Component {
         this.state = {
             countries: [],
             currentCountry: '',
-            inputClass: 'country-list',
             btnTxt: 'Search',
-            btnColor: 'green',
+            color: 'green',
             btnDisabled: false
         };
         this.ref = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.focusInput = this.focusInput.bind(this);
-        this.switchBtnColor = this.switchBtnColor.bind(this);
+        this.switchColor = this.switchColor.bind(this);
     }
 
     handleClick() {
@@ -76,9 +75,8 @@ class Dropdown extends React.Component {
             this.passToggleDashboard(true);
         } else {
             this.setState({
-                inputClass: 'country-list-a',
                 btnTxt: 'Invalid Value',
-                btnColor: 'red',
+                color: 'red',
                 btnDisabled: true
             });
             this.focusInput();
@@ -88,9 +86,8 @@ class Dropdown extends React.Component {
     handleChange(e) {
         this.setState({
             currentCountry: e.target.value,
-            inputClass: 'country-list',
             btnTxt: 'Search',
-            btnColor: 'green',
+            color: 'green',
             btnDisabled: false
         });
         this.passToggleDashboard(false);
@@ -100,8 +97,8 @@ class Dropdown extends React.Component {
         this.ref.current.focus();
     }
 
-    switchBtnColor(btnColor) {
-        this.setState({ btnColor });
+    switchColor(color) {
+        this.setState({ color });
     }
 
     passCountryData(data) {
@@ -128,14 +125,14 @@ class Dropdown extends React.Component {
             <section className="dropdown-area">
                 <div className="dropdown">
                     {/* <label htmlFor="country">Select country: </label> */}
-                    <input type="search" placeholder="Select Country" list="countries" name="country" id="country" className={this.state.inputClass} onChange={this.handleChange} ref={this.ref} />
+                    <input type="search" placeholder="Select Country" list="countries" name="country" id="country" className={`input input-${this.state.color}`} onChange={this.handleChange} ref={this.ref} />
                     <datalist id="countries" required>
                         {this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
                             <option disabled>Loading</option>}
                     </datalist>
                 </div>
-                <button className={`btn-search btn-search-${this.state.btnColor}`} onClick={this.handleClick} disabled={this.state.btnDisabled} >{this.state.btnTxt}</button>
+                <button className={`btn-search btn-search-${this.state.color}`} onClick={this.handleClick} disabled={this.state.btnDisabled} >{this.state.btnTxt}</button>
             </section>
         )
     }

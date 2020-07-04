@@ -8,9 +8,13 @@ function App() {
     <main className="container">
       <header className="header">
         <h1 className="txt-jumbo">Covid-19 Statistics</h1>
-        <h2 className="txt-subjumbo">Wash Hands, Wear Mask, Stay Home</h2>
+        <h2 className="txt-subjumbo triangles">
+          <span className="triangle">Wash Hands</span>
+          <span className="triangle">Wear Mask</span>
+          <span className="triangle">Stay Home</span>
+        </h2>
         <div className="bg-video">
-          <iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/3tBk7ONm95Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/3tBk7ONm95Q" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
         {/* Replacekeywords by iconfont */}
       </header>
