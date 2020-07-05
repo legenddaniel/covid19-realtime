@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @mixin flex($direction, $justify, $align) {
   display: flex;
   flex-direction: $direction;
@@ -71,10 +69,10 @@ $btn-search-side: 36px;
 }
 .triangles {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 20rem;
+  width: 100%;
   height: 4rem;
 }
 .triangle {
@@ -126,6 +124,7 @@ $btn-search-side: 36px;
   border-radius: 15px;
   color: #fff;
   font-size: 2rem;
+  line-height: 3rem;
   text-align: center;
 }
 
@@ -169,7 +168,7 @@ $btn-search-side: 36px;
   left: 0;
   width: $btn-search-side;
   height: $btn-search-side;
-  transform: translateX(-50%) rotate(45deg);
+  transform: translate(-50%,10%) rotate(45deg);
 }
 .btn-search-green::before {
   background-color: green;
