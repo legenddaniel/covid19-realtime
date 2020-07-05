@@ -1,9 +1,10 @@
 import React from 'react';
-import './App.scss';
+import ReactPlayer from 'react-player/youtube';
 import Dashboard from './dashboard';
 import SearchArea from './dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVirus, faHandsWash, faHeadSideMask, faHouseUser } from '@fortawesome/free-solid-svg-icons';
+import './App.scss';
 
 function App() {
   return (
@@ -18,7 +19,15 @@ function App() {
           </p>
         </div>
         <div className="bg-video">
-          <iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/3tBk7ONm95Q" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+          <ReactPlayer
+            url="https://www.youtube.com/embed/3tBk7ONm95Q"
+            width="100%"
+            height="100%"
+            playing
+            loop
+            controls={false}
+            muted
+          />
         </div>
       </header>
       <article className="data-area">
@@ -37,3 +46,4 @@ function App() {
 export default App;
 
 // Offline solution
+// res.map issue

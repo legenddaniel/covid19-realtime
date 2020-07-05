@@ -126,10 +126,11 @@ class Dropdown extends React.Component {
                 <div className="dropdown">
                     {/* <label htmlFor="country">Select country: </label> */}
                     <input type="search" placeholder="Select Country" list="countries" name="country" id="country" className={`input input-${this.state.color}`} onChange={this.handleChange} ref={this.ref} />
-                    <datalist id="countries" required>
-                        {this.state.countries.length ?
+                    <datalist id="countries" required>{
+                        this.state.countries.length ?
                             this.state.countries.map(country => <option key={country.name}>{country.name}</option>) :
-                            <option disabled>Loading</option>}
+                            <option disabled>Loading</option>
+                    }
                     </datalist>
                 </div>
                 <button className={`btn-search btn-search-${this.state.color}`} onClick={this.handleClick} disabled={this.state.btnDisabled} >{this.state.btnTxt}</button>
