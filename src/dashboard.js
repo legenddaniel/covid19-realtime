@@ -2,7 +2,6 @@ import React from 'react';
 import Fetch from './fetch';
 import { fetchWorld } from './config';
 
-// Can use props for data
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -69,18 +68,16 @@ class Dashboard extends React.Component {
     }
 }
 
-class DashboardItem extends React.Component {
-    render() {
-        const num = this.props.num === '' ? 'Loading...' : this.props.num;
-        const dashboardType = {
-            Confirmed: 'dashboard-confirmed',
-            Recovered: 'dashboard-recovered',
-            Deaths: 'dashboard-deaths'
-        };
-        return (
-            <div className={`dashboard ${dashboardType[this.props.type]}`}>{this.props.type}: <br /><span>{num}</span></div>
-        )
-    }
+function DashboardItem(props) {
+    const num = props.num === '' ? 'Loading...' : props.num;
+    const dashboardType = {
+        Confirmed: 'dashboard-confirmed',
+        Recovered: 'dashboard-recovered',
+        Deaths: 'dashboard-deaths'
+    };
+    return (
+        <div className={`dashboard ${dashboardType[props.type]}`}>{props.type}: <br /><span>{num}</span></div>
+    )
 }
 
 export default Dashboard;
