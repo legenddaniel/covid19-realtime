@@ -24,9 +24,9 @@ class Header extends React.Component {
                 <h1 className="txt-jumbo">C<FontAwesomeIcon icon={faVirus} className="virus" />vid-19</h1>
                 <div className="txt-subjumbo triangle-area">
                     <p className="triangles">
-                        <span className="triangle">Wash <FontAwesomeIcon icon={faHandsWash} /></span>
-                        <span className="triangle">Wear <FontAwesomeIcon icon={faHeadSideMask} /></span>
-                        <span className="triangle">Stay <FontAwesomeIcon icon={faHouseUser} /></span>
+                        <span className="triangle">Wash <FontAwesomeIcon icon={faHandsWash} className="triangle-icon" /></span>
+                        <span className="triangle">Wear <FontAwesomeIcon icon={faHeadSideMask} className="triangle-icon" /></span>
+                        <span className="triangle">Stay <FontAwesomeIcon icon={faHouseUser} className="triangle-icon" /></span>
                     </p>
                 </div>
                 <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} onClick={this.toggleVolume} className="video-icon" />

@@ -23,13 +23,13 @@ class Dropdown extends React.Component {
             const newFetchCountry = { ...fetchCountry };
             const encodedCountry = encodeURI(this.state.currentCountry);
             newFetchCountry.url = fetchCountry.url + encodedCountry;
-            
+
             onFetch(newFetchCountry, res => {
                 const data = res[0];
                 this.passCountryData(data);
             });
             this.passToggleDashboard(true);
-            this.fakeThrottling(5);
+            this.fakeThrottling(3);
         } else {
             this.setState({
                 btnTxt: 'Invalid Value',

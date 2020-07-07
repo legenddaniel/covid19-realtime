@@ -5,10 +5,34 @@
   align-items: $align;
 }
 
+@mixin triangle-animation($name, $rotate, $translateY) {
+  @keyframes #{$name} {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 1;
+      transform: rotate($rotate) translateY($translateY);
+    }
+  }
+}
+
 $blur: 0.9;
 $blur-ex: 0.7;
-
 $btn-search-side: 36px;
+$triangle-animation-duration: 3s;
+$triangle-animation-delay: 2s;
+
+@function triangle-animation-opt($name, $delay) {
+  @return $name $triangle-animation-duration $delay ease-out forwards;
+}
 
 @keyframes spin {
   from {
@@ -18,6 +42,19 @@ $btn-search-side: 36px;
     transform: rotate(360deg);
   }
 }
+
+@keyframes blink {
+  from {
+    transform: none;
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+@include triangle-animation(hand, -60deg, -8rem);
+@include triangle-animation(mask, 60deg, -8rem);
+@include triangle-animation(home, 0, 5rem);
 
 * {
   box-sizing: border-box;
@@ -94,15 +131,27 @@ $btn-search-side: 36px;
 .triangle {
   position: absolute;
   width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 .triangle:nth-of-type(1) {
-  transform: translateX(-50%) rotate(-60deg) translateY(-8rem);
+  animation: triangle-animation-opt(hand, $triangle-animation-delay);
+  .triangle-icon {
+    animation: blink 0.5s linear #{$triangle-animation-delay + 0.8s} 2;
+  }
 }
 .triangle:nth-of-type(2) {
-  transform: translateX(-50%) rotate(60deg) translateY(-8rem);
+  animation: triangle-animation-opt(mask, $triangle-animation-delay + $triangle-animation-duration);
+  .triangle-icon {
+    animation: blink 0.5s linear #{$triangle-animation-delay + $triangle-animation-duration + 0.8s} 2;
+  }
 }
 .triangle:nth-of-type(3) {
-  transform: translateX(-50%) translateY(5rem);
+  animation: triangle-animation-opt(home, $triangle-animation-delay + 2 * $triangle-animation-duration);
+  .triangle-icon {
+    animation: blink 0.5s linear #{$triangle-animation-delay + 2 * $triangle-animation-duration + 0.8s} 2;
+  }
 }
 
 .video {
@@ -123,7 +172,7 @@ $btn-search-side: 36px;
 
 .data-area {
   // width: 100%;
-  padding: 3rem;
+  margin: 3rem;
 }
 
 .dashboard-area {
@@ -184,7 +233,7 @@ $btn-search-side: 36px;
   left: 0;
   width: $btn-search-side;
   height: $btn-search-side;
-  transform: translate(-50%,10%) rotate(45deg);
+  transform: translate(-50%, 10%) rotate(45deg);
 }
 .btn-search-green::before {
   background-color: green;
@@ -205,7 +254,7 @@ $btn-search-side: 36px;
   display: none;
 }
 .input:focus {
-  box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+  box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
 }
 .input-green:focus {
   border-color: green;
