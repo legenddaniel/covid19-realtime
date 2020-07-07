@@ -1,4 +1,4 @@
-export default function Fetch(api) {
+function Fetch(api) {
     const url = api.url;
     const opt = api.option;
     const ajax = async () => {
@@ -12,4 +12,9 @@ export default function Fetch(api) {
             return data;
         }
     }
+}
+
+export default function onFetch(data, callback) {
+    const showData = Fetch(data).showJSONData;
+    showData().then(callback);
 }

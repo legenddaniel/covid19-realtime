@@ -1,5 +1,6 @@
 import React from 'react';
-import Fetch from './fetch';
+
+import onFetch from './fetch';
 import { fetchWorld } from './config';
 
 class Dashboard extends React.Component {
@@ -13,7 +14,6 @@ class Dashboard extends React.Component {
                 deaths: ''
             }
         };
-        this.getLastUpdate = this.getLastUpdate.bind(this);
     }
 
     getLastUpdate(time) {
@@ -23,8 +23,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         if (!('data' in this.props)) {
-            const showWorldData = Fetch(fetchWorld).showJSONData;
-            showWorldData().then(res => {
+            onFetch(fetchWorld, res => {
                 const data = res[0];
                 this.setState({
                     data: {

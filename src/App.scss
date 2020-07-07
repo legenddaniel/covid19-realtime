@@ -10,6 +10,15 @@ $blur-ex: 0.7;
 
 $btn-search-side: 36px;
 
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -61,6 +70,12 @@ $btn-search-side: 36px;
   width: 100%;
   min-height: 100vh;
   @include flex(column, center, center);
+}
+
+.virus {
+  color: firebrick;
+  font-size: 4rem;
+  animation: spin 2s linear infinite;
 }
 
 .triangle-area {

@@ -1,4 +1,6 @@
-import Fetch from './fetch';
+import React from 'react';
+
+import onFetch from './fetch';
 import { fetchCountryList, fetchCountry } from './config';
 
 class Dropdown extends React.Component {
@@ -14,8 +16,6 @@ class Dropdown extends React.Component {
         this.ref = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.focusInput = this.focusInput.bind(this);
-        this.switchColor = this.switchColor.bind(this);
     }
 
     handleClick() {
@@ -23,12 +23,13 @@ class Dropdown extends React.Component {
             const newFetchCountry = { ...fetchCountry };
             const encodedCountry = encodeURI(this.state.currentCountry);
             newFetchCountry.url = fetchCountry.url + encodedCountry;
-            const showCountryData = Fetch(newFetchCountry).showJSONData;
-            showCountryData().then(res => {
+            
+            onFetch(newFetchCountry, res => {
                 const data = res[0];
                 this.passCountryData(data);
             });
             this.passToggleDashboard(true);
+            this.fakeThrottling(5);
         } else {
             this.setState({
                 btnTxt: 'Invalid Value',
@@ -57,6 +58,29 @@ class Dropdown extends React.Component {
         this.setState({ color });
     }
 
+    inCooldown(cd) {
+        this.setState({
+            btnTxt: `After ${cd}s`,
+            color: 'red',
+            btnDisabled: true
+        });
+    }
+
+    fakeThrottling(cd) {
+        const state = this.state;
+        let cooldown = cd;
+        this.inCooldown(cooldown);
+        let timer = setInterval(() => {
+            if (cooldown > 1) {
+                --cooldown;
+                this.inCooldown(cooldown);
+            } else {
+                clearInterval(timer);
+                this.setState(state);
+            }
+        }, 1000);
+    }
+
     passCountryData(data) {
         this.props.onSetCountryData(data);
     }
@@ -67,8 +91,7 @@ class Dropdown extends React.Component {
 
     componentDidMount() {
         let timer = setTimeout(() => {
-            const showCountryList = Fetch(fetchCountryList).showJSONData;
-            showCountryList().then(res => {
+            onFetch(fetchCountryList, res => {
                 const data = res.map(country => country);
                 this.setState({ countries: data })
             });
