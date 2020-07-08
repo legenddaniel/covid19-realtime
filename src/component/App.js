@@ -19,7 +19,7 @@ function App() {
         <h2 className="txt-topic-local">Or by country:</h2>
         <SearchArea />
       </article>
-      <Toast autoClose="5000" delay="5000" />
+      <Toast />
     </main>
   )
 }

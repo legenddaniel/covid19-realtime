@@ -62,8 +62,14 @@ $triangle-animation-delay: 2s;
   padding: 0;
 }
 
+body {
+  padding-right: 0 !important;
+  overflow-y: unset !important;
+}
+
 a {
   text-decoration: none;
+  outline: none;
 }
 
 .flex-column {
@@ -87,6 +93,11 @@ a {
 
 .invisible {
   visibility: hidden;
+}
+
+.toast-popup {
+  transform: scale(.8);
+  opacity: 0.7;
 }
 
 .txt-jumbo {

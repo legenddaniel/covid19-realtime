@@ -8,19 +8,22 @@ class Toast extends React.Component {
         const noKey = !this.detectKey();
         if (noKey) {
             setTimeout(() => {
-                Swal.fire({
+                const swal = Swal.mixin({ customClass: { popup: 'toast-popup' } });
+                swal.fire({
                     title: 'No API key detected!',
                     html: 'You can either go to <a href="https://rapidapi.com/Gramzivi/api/covid-19-data/pricing">RapidAPI</a> and apply for one, <br />or go on without a key',
                     position: 'top',
                     showConfirmButton: false,
-                    timer: +this.props.autoClose,
+                    timer: 5000,
                     timerProgressBar: true,
+                    showClass: { popup: 'swal2-show' },
+                    hideClass: { popup: 'swal2-hide' },
                     onOpen(swal) {
                         swal.onmouseenter = Swal.stopTimer;
                         swal.onmouseleave = Swal.resumeTimer;
                     }
                 })
-            }, +this.props.delay);
+            }, 5000);
         }
     };
 
