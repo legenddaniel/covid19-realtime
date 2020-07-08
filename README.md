@@ -20,6 +20,6 @@ You can however still take a look at the design without the API key.
 
 This project is ongoing...
 
-So far the main structure for PC is done. Not deployed yet.
+So far the main structure for PC is done. Later on I will mainly work on responsive design and cross-browser adaptation. May add new functions.
 
 
