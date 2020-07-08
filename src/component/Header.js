@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVirus, faHandsWash, faHeadSideMask, faHouseUser, faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends React.Component {
     constructor(props) {
@@ -21,15 +19,15 @@ class Header extends React.Component {
         const isMuted = this.state.muted;
         return (
             <header className="header">
-                <h1 className="txt-jumbo">C<FontAwesomeIcon icon={faVirus} className="virus spin" />vid-19</h1>
+                <h1 className="txt-jumbo">C<FontAwesomeIcon icon="virus" className="virus spin" />vid-19</h1>
                 <div className="txt-subjumbo triangle-area">
                     <p className="triangles">
-                        <span className="triangle">Wash <FontAwesomeIcon icon={faHandsWash} className="triangle-icon" /></span>
-                        <span className="triangle">Wear <FontAwesomeIcon icon={faHeadSideMask} className="triangle-icon" /></span>
-                        <span className="triangle">Stay <FontAwesomeIcon icon={faHouseUser} className="triangle-icon" /></span>
+                        <span className="triangle">Wash <FontAwesomeIcon icon="hands-wash" className="triangle-icon" /></span>
+                        <span className="triangle">Wear <FontAwesomeIcon icon="head-side-mask" className="triangle-icon" /></span>
+                        <span className="triangle">Stay <FontAwesomeIcon icon="house-user" className="triangle-icon" /></span>
                     </p>
                 </div>
-                <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} onClick={this.toggleVolume} className="video-icon" />
+                <FontAwesomeIcon icon={isMuted ? 'volume-mute' : 'volume-up'} onClick={this.toggleVolume} className="video-icon" />
                 <Player muted={isMuted} />
             </header>
         )

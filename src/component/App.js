@@ -1,4 +1,6 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSpinner, faVirus, faHandsWash, faHeadSideMask, faHouseUser, faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 import Header from './Header';
 import Dashboard from './Dashboard';
@@ -6,6 +8,8 @@ import SearchArea from './Search';
 import Toast from './Toast';
 
 import './App.scss';
+
+library.add(faSpinner, faVirus, faHandsWash, faHeadSideMask, faHouseUser, faVolumeUp, faVolumeMute);
 
 function App() {
   return (
@@ -25,5 +29,3 @@ function App() {
 }
 
 export default App;
-
-// res.map issue

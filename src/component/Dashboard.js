@@ -1,11 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import onFetch from '../util/fetch';
 import { fetchWorld } from '../util/config';
 
-const loading = <span>Loading <FontAwesomeIcon icon={faSpinner} className="spin" /></span>;
+const loading = <span>Loading <FontAwesomeIcon icon="spinner" className="spin" /></span>;
 
 class Dashboard extends React.Component {
     constructor(props) {
