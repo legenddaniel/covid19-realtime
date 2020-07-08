@@ -12,7 +12,7 @@ Since this APP involves an encrypted API that fetches Covid-19 data and in `crea
 2. In the root directory find the file `.env`
 3. In `.env` input Your API key and save
 4. The `.env` file should be like `REACT_APP_KEY="sfgfassgsasgdaf"`
-5. Remember to restart the project once you modify `.env`
+5. Remember to restart the App once you modify `.env`
 
 You can however still take a look at the design without the API key.
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import onFetch from './fetch';
-import { fetchCountryList, fetchCountry } from './config';
+import onFetch from '../util/fetch';
+import { fetchCountryList, fetchCountry } from '../util/config';
 
 class Dropdown extends React.Component {
     constructor(props) {

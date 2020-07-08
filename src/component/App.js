@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from './header';
-import Dashboard from './dashboard';
-import SearchArea from './search';
+import Header from './Header';
+import Dashboard from './Dashboard';
+import SearchArea from './Search';
 
 import './App.scss';
 
@@ -19,7 +19,6 @@ function App() {
         <SearchArea />
       </article>
     </main>
-
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import onFetch from './fetch';
-import { fetchWorld } from './config';
+import onFetch from '../util/fetch';
+import { fetchWorld } from '../util/config';
 
 class Dashboard extends React.Component {
     constructor(props) {

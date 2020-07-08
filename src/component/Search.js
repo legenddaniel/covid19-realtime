@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Dropdown from './dropdown';
-import Dashboard from './dashboard';
+import Dropdown from './Dropdown';
+import Dashboard from './Dashboard';
 
 class SearchArea extends React.Component {
     constructor(props) {
