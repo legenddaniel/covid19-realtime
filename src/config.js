@@ -1,5 +1,3 @@
-// Remove it from .gitignore before final push
-
 const host = "covid-19-data.p.rapidapi.com";
 const key = process.env.REACT_APP_KEY;
 
