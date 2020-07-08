@@ -16,8 +16,7 @@
     "react-dom": "^16.13.1",
     "react-player": "^2.5.0",
     "react-scripts": "3.4.1",
-    "sweetalert2": "^9.15.2",
-    "sweetalert2-react-content": "^3.0.1"
+    "sweetalert2": "^9.15.2"
   },
   "scripts": {
     "predeploy": "npm run build",
