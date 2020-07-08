@@ -1,7 +1,11 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import onFetch from '../util/fetch';
 import { fetchWorld } from '../util/config';
+
+const loading = <span>Loading <FontAwesomeIcon icon={faSpinner} className="spin" /></span>;
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -53,7 +57,7 @@ class Dashboard extends React.Component {
 
     render() {
         const shouldBeInvisible = 'visible' in this.props && !this.props.visible;
-        const lastUpdate = this.state.data.lastUpdate === '' ? 'Loading...' : this.state.data.lastUpdate;
+        const lastUpdate = this.state.data.lastUpdate === '' ? loading : this.state.data.lastUpdate;
         return (
             <section className={`dashboard-area${shouldBeInvisible ? ' invisible' : ''}`}>
                 <p>Last Update: {lastUpdate}</p>
@@ -68,7 +72,7 @@ class Dashboard extends React.Component {
 }
 
 function DashboardItem(props) {
-    const num = props.num === '' ? 'Loading...' : props.num;
+    const num = props.num === '' ? loading : props.num;
     const dashboardType = {
         Confirmed: 'dashboard-confirmed',
         Recovered: 'dashboard-recovered',

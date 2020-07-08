@@ -21,7 +21,7 @@ class Header extends React.Component {
         const isMuted = this.state.muted;
         return (
             <header className="header">
-                <h1 className="txt-jumbo">C<FontAwesomeIcon icon={faVirus} className="virus" />vid-19</h1>
+                <h1 className="txt-jumbo">C<FontAwesomeIcon icon={faVirus} className="virus spin" />vid-19</h1>
                 <div className="txt-subjumbo triangle-area">
                     <p className="triangles">
                         <span className="triangle">Wash <FontAwesomeIcon icon={faHandsWash} className="triangle-icon" /></span>
