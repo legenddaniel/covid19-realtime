@@ -1,5 +1,9 @@
 # Covid-19 Real-time Data
 
+[Github Pages](https://legenddaniel.github.io/covid19-realtime/)
+
+![Online](online.gif)
+
 This is an SPA that obtains real-time data of Covid-19 worldwide. Since this is not an access to an official public health organization database (e.g. WHO or Stat Canada) so it may not reflect a very accurate data. The data from some countries on some date are missing so it is not including daily report.
 
 Also, because YouTube has removed the config option `showInfo`, at the beginning of the video you will see the video information which is so far unresolvable. An alternative is downloading the video and add it to the local source.
