@@ -26,7 +26,7 @@
 
 $blur: 0.9;
 $blur-ex: 0.7;
-$btn-search-side: 36px;
+$btn-search-side: 2.25rem;
 $triangle-animation-duration: 3s;
 $triangle-animation-delay: 2s;
 
@@ -96,7 +96,7 @@ a {
 }
 
 .toast-popup {
-  transform: scale(.8);
+  transform: scale(0.8);
   opacity: 0.7;
 }
 
@@ -118,7 +118,7 @@ a {
   @include flex(column, center, center);
 }
 
-.header {
+.content-wrapper {
   width: 100%;
   min-height: 100vh;
   @include flex(column, center, center);
@@ -156,18 +156,27 @@ a {
   animation: triangle-animation-opt(hand, $triangle-animation-delay);
   .triangle-icon {
     animation: blink 0.5s linear #{$triangle-animation-delay + 0.8s} 2;
+    &:hover {
+      color: #ffcba4;
+    }
   }
 }
 .triangle:nth-of-type(2) {
   animation: triangle-animation-opt(mask, $triangle-animation-delay + $triangle-animation-duration);
   .triangle-icon {
     animation: blink 0.5s linear #{$triangle-animation-delay + $triangle-animation-duration + 0.8s} 2;
+    &:hover {
+      color: skyblue;
+    }
   }
 }
 .triangle:nth-of-type(3) {
   animation: triangle-animation-opt(home, $triangle-animation-delay + 2 * $triangle-animation-duration);
   .triangle-icon {
     animation: blink 0.5s linear #{$triangle-animation-delay + 2 * $triangle-animation-duration + 0.8s} 2;
+    &:hover {
+      color: orangered;
+    }
   }
 }
 
@@ -188,15 +197,16 @@ a {
 }
 
 .data-area {
-  // width: 100%;
+  width: 100%;
   margin: 3rem;
+  @include flex(column, center, center);
 }
 
 .dashboard-area {
   @include flex(column, center, center);
 }
 .dashboards {
-  @include flex(null, space-around, center);
+  @include flex(null, center, center);
   opacity: $blur;
 }
 .dashboard {
@@ -278,4 +288,27 @@ a {
 }
 .input-red:focus {
   border-color: red;
+}
+
+html {
+  @media screen and (max-width: 1024px){
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+  @media screen and (max-width: 576px) {
+    font-size: 0.8rem;
+  }
+}
+
+.data-area {
+  @media screen and (max-width: 576px) {
+    height: 100vh;
+  }
+}
+.dashboards {
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+  }
 }
