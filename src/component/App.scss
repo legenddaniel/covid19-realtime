@@ -29,6 +29,8 @@ $blur-ex: 0.7;
 $btn-search-side: 2.25rem;
 $triangle-animation-duration: 3s;
 $triangle-animation-delay: 2s;
+$input-width: 15rem;
+$input-padding: 0.5rem;
 
 @function triangle-animation-opt($name, $delay) {
   @return $name $triangle-animation-duration $delay ease-out forwards;
@@ -270,8 +272,8 @@ a {
 }
 
 .input {
-  width: 15rem;
-  padding: 0.5rem;
+  width: $input-width;
+  padding: $input-padding;
   border-radius: 25px;
   outline: none;
   font-size: 1.2rem;
@@ -291,24 +293,31 @@ a {
 }
 
 html {
-  @media screen and (max-width: 1024px){
+  @media screen and (max-width: 1024px) {
     font-size: 0.8rem;
   }
   @media screen and (max-width: 768px) {
     font-size: 0.6rem;
   }
-  @media screen and (max-width: 576px) {
-    font-size: 0.8rem;
-  }
 }
 
-.data-area {
-  @media screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
+  html {
+    font-size: 0.8rem;
+  }
+  .data-area {
     height: 100vh;
   }
-}
-.dashboards {
-  @media screen and (max-width: 576px) {
+  .dashboards {
     flex-direction: column;
+  }
+  .dropdown-area {
+    @include flex(column, center, center);
+  }
+  .btn-search {
+    position: relative;
+    width: $input-width;
+    margin: 1rem 0;
+    padding: $input-padding;
   }
 }
