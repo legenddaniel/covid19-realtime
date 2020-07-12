@@ -31,8 +31,6 @@ You can however still take a look at the design without the API key.
 
 <hr>
 
-This project is ongoing...
-
-So far the main structure for PC is done. Later on I will mainly work on responsive design and cross-browser adaptation. May add new functions.
+This project is almost done. Bug fixing.
 
 
