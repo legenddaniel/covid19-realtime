@@ -101,6 +101,7 @@ a {
 }
 
 .content-wrapper {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   @include flex(column, center, center);
@@ -179,6 +180,7 @@ a {
 }
 
 .data-area {
+  position: relative;
   width: 100%;
   margin: 3rem;
   @include flex(column, center, center);
