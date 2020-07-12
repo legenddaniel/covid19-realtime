@@ -41,13 +41,17 @@ class Dropdown extends React.Component {
     }
 
     handleChange(e) {
+        if (!(this.state.btnTxt.includes('After' || 'Invalid'))) {
+            this.setState({
+                btnTxt: 'Search',
+                color: 'green',
+                btnDisabled: false
+            });
+            this.passToggleDashboard(false);
+        }
         this.setState({
-            currentCountry: e.target.value,
-            btnTxt: 'Search',
-            color: 'green',
-            btnDisabled: false
+            currentCountry: e.target.value
         });
-        this.passToggleDashboard(false);
     }
 
     focusInput() {
@@ -67,7 +71,6 @@ class Dropdown extends React.Component {
     }
 
     fakeThrottling(cd) {
-        const state = this.state;
         let cooldown = cd;
         this.inCooldown(cooldown);
         let timer = setInterval(() => {
@@ -76,7 +79,11 @@ class Dropdown extends React.Component {
                 this.inCooldown(cooldown);
             } else {
                 clearInterval(timer);
-                this.setState(state);
+                this.setState({
+                    btnTxt: 'Search',
+                    color: 'green',
+                    btnDisabled: false
+                });
             }
         }, 1000);
     }
