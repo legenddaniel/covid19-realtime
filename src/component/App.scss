@@ -75,25 +75,6 @@ a {
   outline: none;
 }
 
-.flex-column {
-  flex-direction: column;
-}
-
-.justify-center {
-  @include flex(null, center, null);
-}
-.justify-around {
-  @include flex(null, space-around, null);
-}
-
-.align-center {
-  @include flex(null, null, center);
-}
-
-.flex-center {
-  @include flex(null, center, center);
-}
-
 .invisible {
   visibility: hidden;
 }
@@ -113,8 +94,6 @@ a {
   font-size: 2rem;
 }
 .container {
-  // width: 100vw;
-  // height: 100vh;
   position: relative;
   color: #fff;
   text-align: center;
@@ -236,7 +215,6 @@ a {
 .dropdown-area {
   position: relative;
   margin: 1rem;
-  // @include flex(null, center, center);
 }
 .dropdown {
   display: inline-block;
@@ -320,5 +298,8 @@ html {
     width: $input-width;
     margin: 1rem 0;
     padding: $input-padding;
+  }
+  .btn-search::before {
+    transform: translate(-50%, 5%) rotate(45deg);
   }
 }
