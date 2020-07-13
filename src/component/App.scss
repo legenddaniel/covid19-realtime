@@ -94,17 +94,18 @@ a {
   font-size: 2rem;
 }
 .container {
-  position: relative;
   color: #fff;
   text-align: center;
   @include flex(column, center, center);
 }
 
-.content-wrapper {
-  position: relative;
+.wrapper {
   width: 100%;
-  min-height: 100vh;
   @include flex(column, center, center);
+}
+.header-wrapper,
+.main-wrapper {
+  min-height: 100vh;
 }
 
 .virus {
@@ -180,7 +181,6 @@ a {
 }
 
 .data-area {
-  position: relative;
   width: 100%;
   margin: 3rem;
   @include flex(column, center, center);
@@ -286,8 +286,11 @@ html {
   html {
     font-size: 0.8rem;
   }
+  .main-wrapper {
+    height: 100%;
+  }
   .data-area {
-    height: 75vh;
+    height: 40rem;
   }
   .dashboards {
     flex-direction: column;
@@ -303,5 +306,11 @@ html {
   }
   .btn-search::before {
     transform: translate(-50%, 5%) rotate(45deg);
+  }
+}
+
+@media screen and (max-height: 320px) {
+  .header-wrapper {
+    height: 320px;
   }
 }

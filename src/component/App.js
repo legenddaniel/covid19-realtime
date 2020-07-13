@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <main className="content-wrapper">
+      <main className="wrapper main-wrapper">
         <article className="data-area">
           <h2 className="txt-topic-local">Worldwide:</h2>
           <Dashboard />
@@ -31,3 +31,12 @@ function App() {
 }
 
 export default App;
+
+/*
+all (especially chrome)
+// white space at bot when dragging down
+
+ios
+// triangle not transforming
+// btn search no bgc
+*/

@@ -18,7 +18,7 @@ class Header extends React.Component {
     render() {
         const isMuted = this.state.muted;
         return (
-            <header className="content-wrapper">
+            <header className="wrapper header-wrapper">
                 <h1 className="txt-jumbo">C<FontAwesomeIcon icon="virus" className="virus spin" />vid-19</h1>
                 <div className="txt-subjumbo triangle-area">
                     <p className="triangles">
