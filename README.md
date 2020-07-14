@@ -29,8 +29,4 @@ Since this APP involves an encrypted API that fetches Covid-19 data and in `crea
 
 You can however still take a look at the design without the API key.
 
-<hr>
-
-This project is almost done. Bug fixing.
-
 
