@@ -6,15 +6,13 @@ function Fetch(api) {
         const data = await res.json();
         return data;
     };
-    return {
-        async showJSONData() {
-            const data = await ajax();
-            return data;
-        }
+    return async function () {
+        const data = await ajax();
+        return data;
     }
 }
 
 export default function onFetch(data, callback) {
-    const showData = Fetch(data).showJSONData;
+    const showData = Fetch(data);
     showData().then(callback);
 }
