@@ -31,12 +31,3 @@ function App() {
 }
 
 export default App;
-
-/*
-all (especially chrome)
-// white space at bot when dragging down
-
-ios
-// triangle not transforming
-// btn search no bgc
-*/
