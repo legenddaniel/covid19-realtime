@@ -57,6 +57,9 @@ $input-padding: 0.5rem;
 @include triangle-animation(hand, -60deg, -8rem);
 @include triangle-animation(mask, 60deg, -8rem);
 @include triangle-animation(home, 0, 5rem);
+@include triangle-animation(hand-m, -60deg, -102.4px);
+@include triangle-animation(mask-m, 60deg, -102.4px);
+@include triangle-animation(home-m, 0, 64px);
 
 * {
   box-sizing: border-box;
@@ -230,6 +233,7 @@ a {
   width: 10rem;
   height: 100%;
   overflow: hidden;
+  background-color: rgb(240, 240, 240);
   border: none;
   outline: none;
   border-radius: 25px;
@@ -306,6 +310,15 @@ html {
   }
   .btn-search::before {
     transform: translate(-50%, 5%) rotate(45deg);
+  }
+  .triangle:nth-of-type(1) {
+    animation: triangle-animation-opt(hand-m, $triangle-animation-delay);
+  }
+  .triangle:nth-of-type(2) {
+    animation: triangle-animation-opt(mask-m, $triangle-animation-delay + $triangle-animation-duration);
+  }
+  .triangle:nth-of-type(3) {
+    animation: triangle-animation-opt(home-m, $triangle-animation-delay + 2 * $triangle-animation-duration);
   }
 }
 
