@@ -19,23 +19,11 @@ class Dashboard extends React.Component {
         };
     }
 
-    getLastUpdate(time) {
-        const timeLocale = new Date(time).toLocaleString('en-CA');
-        return time === null ? 'N/A' : `${timeLocale} (EST)`;
-    }
-
     componentDidMount() {
         if (!('data' in this.props)) {
             onFetch(fetchWorld, res => {
                 const data = res[0];
-                this.setState({
-                    data: {
-                        lastUpdate: this.getLastUpdate(data.lastUpdate),
-                        confirmed: data.confirmed,
-                        recovered: data.recovered,
-                        deaths: data.deaths
-                    }
-                });
+                this.setState({ data });
             });
         }
     }
@@ -43,14 +31,7 @@ class Dashboard extends React.Component {
     componentDidUpdate(prevProps) {
         if ('data' in this.props && this.props.data !== prevProps.data) {
             const data = this.props.data;
-            this.setState({
-                data: {
-                    lastUpdate: this.getLastUpdate(data.lastUpdate),
-                    confirmed: data.confirmed,
-                    recovered: data.recovered,
-                    deaths: data.deaths
-                }
-            });
+            this.setState({ data });
         }
     }
 

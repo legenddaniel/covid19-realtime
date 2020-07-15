@@ -20,14 +20,7 @@ class SearchArea extends React.Component {
     }
 
     setCountryData(data) {
-        this.setState({
-            data: {
-                lastUpdate: data.lastUpdate,
-                confirmed: data.confirmed,
-                recovered: data.recovered,
-                deaths: data.deaths
-            }
-        });
+        this.setState({ data });
     }
 
     showDashboard(toggle) {
